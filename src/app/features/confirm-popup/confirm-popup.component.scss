@@ -1,0 +1,84 @@
+.popup-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: color-mix(in srgb, var(--bg-secondary) 70%, transparent);
+    backdrop-filter: blur(.5rem);
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    color: var(--text-primary);
+}
+
+.popup {
+    width: 100%;
+    max-width: 420px;
+    background: color-mix(in srgb, var(--bg-secondary) 85%, transparent);
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    box-shadow: var(--shadow-lg);
+    animation: popupIn 0.25s ease-out;
+}
+
+.popup-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.popup-message {
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.btn {
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    transition: color .15s ease;
+
+    &:hover {
+        color: var(--text-primary);
+    }
+    
+}
+
+.btn.primary {
+    background-color: color-mix(in srgb, var(--accent) 70%, transparent);
+    color: var(--text-primary);
+    transition: background-color .15s ease;
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--accent-hover) 50%, 20% transparent);
+    }
+}
+
+@keyframes popupIn {
+    from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0;
+    }
+    to {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup {
+        border-radius: 1rem;
+    }
+}

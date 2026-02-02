@@ -9,7 +9,7 @@
                     <div class="main-info-photo">
                         <img src="/my-photo.png" alt="My photo" />
                     </div>
-                    <div class="main-info-text" [style.opacity]="textOpacity()">
+                    <div class="main-info-text">
                         <h3>Привет, меня зовут Виталий, и я - fullstack разработчик</h3>
                         <p>Короткое вступление</p>
                         <div class="divider"></div>
@@ -22,7 +22,7 @@
             </div>
         </section>
         <section id="projects" class="projects-section">
-            <h3 class="projects-section-header">Проекты че каво</h3>
+            <h3 class="projects-section-header">Учебные проекты</h3>
             <ul>
                 <li class="project-card">
                     <div class="project-card-photo" (click)="goToProject('rock-paper-scissors')">
@@ -47,35 +47,52 @@
                     <div class="project-card-description">
                         <h5 class="project-card-description-header">Прогноз погоды</h5>
                         <span class="project-card-description-text">
-                            Приложение прогноза погоды. Использует Open-Meteo-API
-                            и геолокацию для поиска (возможно, пока непонятно)
-                            местанахождения. Дизайн взят с Frontend Mentor.
+                            Приложение прогноза погоды. Использует Open-Meteo-API, имеет 
+                            фильтры и поиск по городам, а также запоминает их
+                            для удобного использования. Дизайн взят с Frontend Mentor.
                         </span>
                         <button class="project-card-description-button"
                                 type="button"
                                 (click)="goToProject('weather-forecast')">Перейти</button>
                     </div>
                 </li>
-                <li class="project-card"></li>
-                <li class="project-card"></li>
             </ul>
         </section>
         
-        <section id="skills">
-            <h3>Технологии</h3>
+        <section id="skills" class="skills-section">
+            <h3 class="skills-section-header">Технологии, которые я использую</h3>
             <div>
                 <app-tag-cloud
                     [config]="cloudConfig"
-                    [tags]="tags">
+                    [tags]="tags"
+                    (tagClicked)="onTagClicked($event)">
                 </app-tag-cloud>
             </div>
         </section>
 
         <section id="contacts" class="contacts-section">
             <h3 class="contacts-section-header">Контакты</h3>
-            <div>GitHub</div>
-            <div>LinkedIn</div>
-            <div>Telegram</div>
+            <div class="contacts-section-links">
+                <a href="" class="link" (click)="onContactClick($event, gitHubLink)">
+                    <img src="/icon-github.png" alt="GitHub icon">
+                </a>
+                <a href="" class="link" (click)="onContactClick($event, linkedinLink)">
+                    <img src="/icon-linkedin.png" alt="LinkedIn icon">
+                </a>
+                <a href="" class="link" (click)="onContactClick($event, tgLink)">
+                    <img src="/icon-tg.png" alt="Telegram icon">
+                </a>
+            </div>
         </section>
     </div>
 </main>
+
+<app-confirm-popup
+    [isOpen]="isPopupOpen()"
+    title="Переход по ссылке"
+    [message]="`Вы собираетесь перейти на ${selectedLink}`"
+    confirmText="Перейти"
+    cancelText="Отмена"
+    (confirm)="onPopupConfirm()"
+    (cancel)="closePopup()">
+</app-confirm-popup>

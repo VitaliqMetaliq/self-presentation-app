@@ -1,0 +1,24 @@
+@if (isOpen()) {
+    <div class="popup-backdrop" (click)="onBackdropClick()">
+        <div class="popup" (click)="$event.stopPropagation()">
+
+            <h4 class="popup-title">{{ title() }}</h4>
+
+            <p class="popup-message">
+                {{ message() }}
+            </p>
+
+            <div class="popup-actions">
+                <button class="btn ghost"
+                        (click)="cancel.emit()">
+                    {{ cancelText() }}
+                </button>
+
+                <button class="btn primary"
+                        (click)="confirm.emit()">
+                    {{ confirmText() }}
+                </button>
+            </div>
+        </div>
+    </div>
+}

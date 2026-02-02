@@ -3,7 +3,11 @@
         #cloudContainer
         class="tag-cloud">
         @for (tag of tags(); track tag.id) {
-            <a class="tag" [href]="tag.link" target="_blank" rel="noopener noreferrer">
+            <a class="tag" 
+               href=""
+               target="_blank" 
+               rel="noopener noreferrer"
+               (click)="onTagClicked($event, tag.link)">
                 {{ tag.name }}
             </a>
         }

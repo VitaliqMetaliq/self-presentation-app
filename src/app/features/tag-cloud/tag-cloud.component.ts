@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, inject, Input, input, OnDestroy, Renderer2, signal, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, OnDestroy, output, Renderer2, ViewChild } from "@angular/core";
 
 @Component({
     selector: 'app-tag-cloud',
@@ -30,6 +30,8 @@ export class TagCloudComponent implements AfterViewInit, OnDestroy {
     public config = input<TagCloudConfig>(this.defaultConfig);
 
     public tags = input.required<TagCloudItem[]>();
+
+    public tagClicked = output<string>();
 
     private cloudConfig = computed(() => ({
         ...this.defaultConfig,
@@ -169,6 +171,13 @@ export class TagCloudComponent implements AfterViewInit, OnDestroy {
 
         // инициируем анимацию
         this.initAnimation();
+    }
+
+    public onTagClicked($event: Event, link?: string) {
+        $event.preventDefault();
+        if (link) {
+            this.tagClicked.emit(link);
+        }
     }
 
     private onDragStart(e: MouseEvent | TouchEvent): void {

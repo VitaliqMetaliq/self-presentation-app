@@ -1,13 +1,6 @@
 @use 'variables.scss';
 @use 'themes.scss';
 
-// html, body, #root {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-// //   height: 100%;
-// }
-
 @font-face {
     font-family: 'DM Sans';
     src: url('/pages/weather-forecast/assets/DMSans-VariableFont_opsz\,wght.ttf') format('truetype-variations');
@@ -31,16 +24,9 @@ html, h1, h2, h3, h4, h5, h6, ul, main {
 	padding: 0;
 }
 
-// html {
-// 	scroll-behavior: smooth;
-// }
-
 body {
 	margin: 0;
 	padding: 0;
-  	// background-color: var(--bg-main);
-	// color: var(--text-primary);
-	// transition: background-color .3s ease, color .3s ease;
 	-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -53,21 +39,3 @@ a {
 ul {
 	list-style: none;
 }
-
-// header {
-// 	position: fixed;
-// 	inset: 0 0 auto 0;
-// 	height: 64px;
-// 	display: flex;
-// 	justify-content: center;
-// 	z-index: 60;
-// 	background: transparent;
-// }
-
-// .content-wrapper {
-// 	margin-top: 64px;
-// 	padding: 0 20px;
-// 	margin: 0 auto;
-// 	align-items: center;
-// 	max-width: 1400px;
-// }
