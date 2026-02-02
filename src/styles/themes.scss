@@ -1,0 +1,62 @@
+@use 'variables.scss' as vars;
+
+:root {
+    @include vars.export-css-vars(vars.$light-palette);
+}
+
+:root.light-theme {
+    @include vars.export-css-vars(vars.$light-palette);
+
+}
+
+:root.dark-theme { // попробовать растаскать все стили отсюда по 
+    @include vars.export-css-vars(vars.$dark-palette);
+
+    .content-wrapper::before {
+        opacity: 0;
+    }
+    
+    .main-content {
+        background: none;
+    }
+    // .content-wrapper {
+    //     background: none;
+    // }
+
+    .header-bg::after {
+        background: rgba(255,255,255,0.08);
+    }
+
+    .divider {
+        background: rgba(31, 41, 55, 1);
+    }
+    
+    .main-info-photo {
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .main-info-bg { // делаем выдимым бэкграунд
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .header-bg { 
+        background-color: rgba(17, 24, 39, 0.6);
+    }
+
+    // .main-info-wrapper {
+    //     background: none;
+    // }
+
+    .main-info-wrapper::before { // убираем градиент
+        opacity: 0;
+    }
+
+    .theme-toggle {
+        background-color: var(--accent-hover);
+    }
+
+    .theme-toggle::after {
+        transform: translateX(20px);
+    }
+}

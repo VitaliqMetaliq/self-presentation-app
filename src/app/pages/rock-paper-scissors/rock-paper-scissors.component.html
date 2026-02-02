@@ -1,0 +1,93 @@
+<header class="score">
+    <div class="score-logo">
+        <img src="./pages/rock-paper-scissors/logo.svg" alt="Rock-Paper-Scissors logo">
+    </div>
+    <div class="score-counter">
+        <div class="score-counter-wrapper">
+            <span>SCORE</span>
+            <span>{{ gameScore }}</span>
+        </div>
+        
+    </div>
+</header>
+<main class="content-wrapper">
+    <div class="main-scene" [class.figure-picked]="figurePicked()">
+        <img class="main-scene-bg"
+             src="./pages/rock-paper-scissors/bg-triangle.svg" alt="Triangle background">
+
+        <div class="main-scene-shadow left"
+             [class.shadow-left-adaptation]="houseChoice() !== null"
+             [class.wave-active]="gameResult() === 'YOU WIN'"></div>
+        <div class="main-scene-shadow right"
+             [class.shadow-right-adaptation]="houseChoice() !== null"
+             [class.wave-active]="gameResult() === 'YOU LOSE'"></div>
+
+        <div class="figure-icon house-choice"
+            [class.house-choice-adaptation]="houseChoice() !== null"
+            [class.house-rock]="houseChoice()==='rock'"
+            [class.house-paper]="houseChoice()==='paper'"
+            [class.house-scissors]="houseChoice()==='scissors'">
+            <div class="figure-inner">
+                @switch(houseChoice()) {
+                    @case ('paper') {
+                        <img src="./pages/rock-paper-scissors/icon-paper.svg" alt="Paper icon">
+                    }
+                    @case ('scissors') {
+                        <img src="./pages/rock-paper-scissors/icon-scissors.svg" alt="Scissors icon">
+                    }
+                    @case ('rock') {
+                        <img src="./pages/rock-paper-scissors/icon-rock.svg" alt="Rock icon">
+                    }
+                }
+            </div>
+        </div>
+
+        @if (houseChoice() !== null) {
+            <div class="main-scene-verdict" 
+                [class.main-scene-verdict-adaptation]="houseChoice() !== null">
+                <span>{{ gameResult() }}</span>
+                <button type="button" (click)="onPlayAgainClick()">PLAY AGAIN</button>
+            </div>
+        }
+
+        <div class="figure-icon icon-paper"
+             [class.selected]="selectedFigure() === 'paper'"
+             [class.figure-adaptation]="houseChoice() !== null"
+             (click)="onFigureClick('paper')">
+            <div class="figure-inner">
+                <img src="./pages/rock-paper-scissors/icon-paper.svg" alt="Paper icon">
+            </div>
+        </div>
+        
+        <div class="figure-icon icon-scissors"
+             [class.selected]="selectedFigure() === 'scissors'"
+             [class.figure-adaptation]="houseChoice() !== null"
+             (click)="onFigureClick('scissors')">
+            <div class="figure-inner">
+                <img src="./pages/rock-paper-scissors/icon-scissors.svg" alt="Scissors icon">
+            </div>
+        </div>
+        
+        <div class="figure-icon icon-rock"
+             [class.selected]="selectedFigure() === 'rock'"
+             [class.figure-adaptation]="houseChoice() !== null"
+             (click)="onFigureClick('rock')">
+            <div class="figure-inner">
+                <img src="./pages/rock-paper-scissors/icon-rock.svg" alt="Rock icon">
+            </div>
+        </div>
+    </div>
+</main>
+<aside class="overlay"
+       [class.open]="popupOpen()">
+    <div class="popup" (click)="$event.stopPropagation()">
+        <span>RULES</span>
+        <img class="popup-img" src="./pages/rock-paper-scissors/image-rules.svg" alt="Game rules image">
+        <button type="button" (click)="onClosePopupClick()">
+            <img src="./pages/rock-paper-scissors/icon-close.svg" alt="Close icon">
+        </button>
+    </div>
+</aside>
+<footer class="rules-footer">
+    <button type="button" (click)="onRulesClick()">RULES</button>
+</footer>

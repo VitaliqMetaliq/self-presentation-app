@@ -1,0 +1,139 @@
+header {
+	position: fixed;
+	inset: 0 0 auto 0;
+	height: 64px;
+	display: flex;
+	justify-content: center;
+	z-index: 60;
+	background: transparent;
+}
+
+.header-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: rgba(255, 255, 255, 0.75); // изменить на переменную
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: opacity .3s ease, background-color .3s ease;
+    pointer-events: none;
+}
+
+.header-bg::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: rgba(0,0,0,0.04);
+}
+
+.top-navbar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 80%;
+    max-width: 1400px;
+    height: 64px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    background: transparent;
+
+    .nav-left ul {
+        display: flex;
+        gap: 20px;
+
+        .nav-item {
+            cursor: pointer;
+            position: relative;
+            padding: 4px 8px;
+
+            & a {
+                color: var(--text-secondary);
+                font-size: 20px;
+                font-weight: 600;
+                padding: 6px 10px;
+                border-radius: 6px;
+                transition: color .2s ease, background-color .2s ease;
+
+                &:hover {
+                    color: var(--text-primary);
+                    background-color: color-mix(
+                        in srgb,
+                        var(--bg-secondary) 70%,
+                        transparent
+                    );
+                }
+
+                &:active {
+                    color: var(--accent-hover);
+                }
+            }
+        }
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .theme-toggle {
+        width: 44px;
+        height: 24px;
+        border-radius: 999px;
+        background-color: var(--bg-main);
+        border: 1px solid var(--border);
+        position: relative;
+        cursor: pointer;
+        transition: background-color .25s ease;
+    }
+
+    .theme-toggle::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 1.1rem; // 18px;
+        height: 1.1rem;
+        border-radius: 50%;
+        background-color: var(--accent-hover);
+        box-shadow: var(--shadow-sm);
+        transition: transform .25s ease;
+    }
+
+    // стили для кнопки переключения языка
+    // .lang-toggle {
+    //     font-size: 13px;
+    //     font-weight: 500;
+    //     color: var(--text-secondary);
+    //     padding: 4px 8px;
+    //     border-radius: 6px;
+    //     cursor: pointer;
+    //     transition: color .2s ease;
+    // }
+
+    // .lang-toggle:hover {
+    //    color: var(--text-primary);
+    // }
+}
+
+.desktop-only {
+    display: none;
+}
+
+.mobile-only {
+    display: block;
+}
+
+@media(min-width: 900px) {
+    .desktop-only {
+        display: block;
+    }
+
+    .mobile-only {
+        display: none;
+    }
+}

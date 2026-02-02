@@ -1,0 +1,75 @@
+.tag-cloud-container { 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // perspective: 1000px; // ?
+    overflow: hidden;
+    // position: relative;
+}
+
+// .tag-cloud-container::after {
+//   content: '';
+//   position: absolute;
+//   inset: 0;
+//   background: radial-gradient(
+//     ellipse at center,
+//     color-mix(in srgb, var(--accent, #6366f1) 50%, transparent) 0%,
+//     transparent 20%
+//   );
+//   pointer-events: none;
+//   z-index: 0;
+// }
+
+// .tag-cloud-container::before {
+//     content: '';
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 70%);
+//     z-index: 0; 
+//     animation: pulse 8s infinite alternate ease-in-out;
+// }
+
+// @keyframes pulse {
+//     from {opacity: 0.3; transform: scale(0.95); }
+//     to { opacity: 0.6; transform: scale(1.05); }
+// }
+
+.tag-cloud {
+    position: relative;
+    width: clamp(280px, 80vw, 800px);
+    height: clamp(280px, 40vh, 500px);
+    cursor: grab;
+    user-select: none;
+    transform-style: preserve-3d;
+    mask-image: radial-gradient(
+        ellipse at center,
+        var(--text-primary) 40%,
+        transparent 70%
+    );
+}
+
+.tag-cloud:active {
+    cursor: grabbing;
+}
+
+.tag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: transform 0.1s, opacity 0.1s, color .1s ease, text-shadow .1s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  backface-visibility: hidden;
+}
+
+.tag:hover {
+    color: var(--accent-hover);
+    text-shadow: 0 4px 20px color-mix(in srgb, var(--accent-hover) 35%, transparent);
+}

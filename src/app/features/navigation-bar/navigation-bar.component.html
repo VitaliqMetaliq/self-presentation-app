@@ -1,0 +1,27 @@
+<header>
+    <div class="header-bg"></div>
+    <div class="top-navbar">
+        <nav class="nav-left desktop-only">
+            <ul>
+                @for(item of navList; track item.anchor) {
+                    <li class="nav-item">
+                        <a href="" (click)="onNavClick($event, item.anchor)">
+                            {{ item.name }}
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+        <div class="nav-right">
+            <!--Сюда еще добавлю переключалку языка-->
+            <div class="theme-toggle" (click)="onToggleClicked()"></div> <!-- должен быть button -->
+            <div class="mobile-only">
+                <app-mobile-nav
+                    [navList]="navList">
+                </app-mobile-nav>
+            </div>
+            
+            
+        </div>
+    </div>
+</header>

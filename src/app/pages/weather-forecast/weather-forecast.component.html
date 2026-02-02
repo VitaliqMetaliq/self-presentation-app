@@ -1,0 +1,265 @@
+<header>
+    <div class="header">
+        <div class="header-wrapper">
+            <div class="header-img">
+                <img src="./pages/weather-forecast/logo.svg" alt="Weather forecast logo">
+            </div>
+            <div class="header-select" 
+                 [class.open]="isUnitsOpen()"
+                 tabindex="0" 
+                 (click)="toggleUnits($event)" #unitsRef>
+                <img class="gear" 
+                     src="./pages/weather-forecast/icon-units.svg" alt="Settings gear icon">
+                <span>Units</span>
+                <img class="dropdown-arrow" 
+                    [class.open]="isUnitsOpen()"
+                    src="./pages/weather-forecast/icon-dropdown.svg" alt="Dropdown icon">
+
+                <div class="units-list" [class.open]="isUnitsOpen()">
+                    <div class="radio-group">
+                        <span class="radio-group-header">Temperature</span>
+                        <label class="radio-group-option">
+                            <input type="radio"
+                                name="temperature"
+                                value="celsius"
+                                [checked]="selectedUnits().temperature === 'celsius'"
+                                (change)="onUnitChange('temperature', 'celsius')">
+                            <span class="radio-option-label">Celsius (°C)</span>
+                            <span class="radio-option-check"></span>
+                        </label>
+                        <label class="radio-group-option">
+                            <input type="radio"
+                                name="temperature"
+                                value="fahrenheit"
+                                [checked]="selectedUnits().temperature === 'fahrenheit'"
+                                (change)="onUnitChange('temperature', 'fahrenheit')">
+                            <span class="radio-option-label">Fahrenheit (°F)</span>
+                            <span class="radio-option-check"></span>
+                        </label>
+                    </div>
+                    <div class="radio-group">
+                        <span class="radio-group-header">Wind speed</span>
+                        <label class="radio-group-option">
+                            <input type="radio"
+                                name="windspeed"
+                                value="kmh"
+                                [checked]="selectedUnits().windspeed === 'kmh'"
+                                (change)="onUnitChange('windspeed', 'kmh')">
+                            <span class="radio-option-label">km/h</span>
+                            <span class="radio-option-check"></span>
+                        </label>
+                        <label class="radio-group-option">
+                            <input type="radio"
+                                name="windspeed"
+                                value="mph"
+                                [checked]="selectedUnits().windspeed === 'mph'"
+                                (change)="onUnitChange('windspeed', 'mph')">
+                            <span class="radio-option-label">mph</span>
+                            <span class="radio-option-check"></span>
+                        </label>
+                    </div>
+                    <div class="radio-group">
+                        <span class="radio-group-header">Precipitation</span>
+                        <label class="radio-group-option">
+                            <input type="radio"
+                                name="precipitation"
+                                value="mm"
+                                [checked]="selectedUnits().precipitation === 'mm'"
+                                (change)="onUnitChange('precipitation', 'mm')">
+                            <span class="radio-option-label">Millimeters (mm)</span>
+                            <span class="radio-option-check"></span>
+                        </label>
+                        <label class="radio-group-option">
+                            <input type="radio"
+                                name="precipitation"
+                                value="inch"
+                                [checked]="selectedUnits().precipitation === 'inch'"
+                                (change)="onUnitChange('precipitation', 'inch')">
+                            <span class="radio-option-label">Inches (in)</span>
+                            <span class="radio-option-check"></span>
+                        </label>
+                    </div>
+                </div>
+                <!-- } -->
+            </div>
+        </div>
+        
+    </div>
+    @if (store.error()) {
+        <section class="error-section">
+            <img class="error-section-image" src="./pages/weather-forecast/icon-error.svg" alt="Error icon">
+            <h1 class="main-title">Something went wrong</h1>
+            <span>{{ store.error() }}</span>
+            <button class="error-section-button" type="button" (click)="onRetryClick()">
+                <img src="./pages/weather-forecast/icon-retry.svg" alt="Retry icon">
+                <span>Retry</span>
+            </button>
+        </section>
+    } @else {
+        <h1 class="main-title">How's the sky looking today?</h1>
+        <section class="search">
+            <div class="search-input">
+                <img src="./pages/weather-forecast/icon-search.svg" alt="Search icon">
+                <input #searchInput type="text" placeholder="Search for a place...">
+                @if (isSearchOpen()) {
+                    <div class="search-result" #searchRef>
+                        @if (store.locationsLoading()) {
+                            <div class="search-result-progress">
+                                <svg class="spinner"
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    width="16" 
+                                    height="16" 
+                                    fill="#FFFFFF" viewBox="0 0 16 16">
+                                    <path fill="#fff" d="M9.25 1.5c0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25C6.75.812 7.281.25 8 .25c.688 0 1.25.563 1.25 1.25ZM8 13.25c.688 0 1.25.563 1.25 1.25 0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25 0-.688.531-1.25 1.25-1.25ZM15.75 8c0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25 0-.688.531-1.25 1.25-1.25.688 0 1.25.563 1.25 1.25Zm-13 0c0 .719-.563 1.25-1.25 1.25C.781 9.25.25 8.719.25 8c0-.688.531-1.25 1.25-1.25.688 0 1.25.563 1.25 1.25Zm.625-5.844c.719 0 1.25.563 1.25 1.25 0 .719-.531 1.25-1.25 1.25-.688 0-1.25-.531-1.25-1.25 0-.687.563-1.25 1.25-1.25Zm9.219 9.219c.687 0 1.25.531 1.25 1.25 0 .688-.563 1.25-1.25 1.25-.719 0-1.25-.563-1.25-1.25 0-.719.531-1.25 1.25-1.25Zm-9.219 0c.719 0 1.25.531 1.25 1.25 0 .688-.531 1.25-1.25 1.25-.688 0-1.25-.563-1.25-1.25 0-.719.563-1.25 1.25-1.25Z"/>
+                                </svg>
+
+                                <span>Search in progress</span>
+                            </div>
+                        } @else {
+                            <ul class="search-result-list">
+                                @for (loc of store.search(); track loc.id) {
+                                    <li class="search-result-list-item" (click)="selectLocation(loc, $event); searchInput.value='';">
+                                        <div class="item-city">
+                                            <span>{{ loc.name }}, </span>
+                                            <span>{{ loc.country }}</span>
+                                        </div>
+                                        <span class="item-country">
+                                            {{ loc.country_code }}
+                                        </span>
+                                    </li>
+                                }
+
+                                @if (!store.search()) {
+                                    <li class="search-result-list-item">
+                                        No results found
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                }
+            </div>
+            
+            <div class="search-button">
+                <button type="button" (click)="onSearchClick(searchInput.value)">Search</button>
+            </div>
+        </section>
+    }
+</header>
+@if (!store.error()) {
+    <main class="main">
+        <section class="section-today">
+            <!-- @if (store.current()) { -->
+            <div class="section-today-main">
+                @if (!store.loading() && store.current()) {
+                    <img class="background-image" src="./pages/weather-forecast/bg-today-large.svg" alt="Background for weather section">
+                    <div class="location-wrapper">
+                        <h4 class="location">{{ location().name }}, {{ location().country }}</h4>
+                        <span class="today-date">{{ store.current()?.date }}</span>
+                    </div>
+                    <div class="today-temperature">
+                        <div class="today-temperature-image">
+                            <img [src]="store.current()!.weatherCode | weatherIcon" [alt]="store.current()?.weatherCode">
+                        </div>
+                        <div class="today-temperature-temp">
+                            {{ store.current()?.temperature }}°
+                        </div>
+                    </div>
+                } @else {
+                    <div class="loading-wrapper">
+                        <div class="loading-bounce">
+                            <div class="bounce-item"></div>
+                            <div class="bounce-item"></div>
+                            <div class="bounce-item"></div>
+                        </div>
+                        <span>Loading..</span>
+                    </div>
+                    
+                }
+                <!-- <span>Loading...</span> -->
+                
+            </div>
+            <div class="section-today-card">
+                <h5 class="card-header">Feels Like</h5>
+                <span class="card-value">{{ store.current()?.feelsLike }}°</span>
+            </div>
+            <div class="section-today-card">
+                <h5 class="card-header">Humidity</h5>
+                <span class="card-value">{{ store.current()?.humidity }}%</span>
+            </div>
+            <div class="section-today-card">
+                <h5 class="card-header">Wind</h5>
+                <span class="card-value">{{ store.current()?.windspeed }} {{ store.current()?.units?.windspeed }}</span>
+            </div>
+            <div class="section-today-card">
+                <h5 class="card-header">Precipitation</h5>
+                <span class="card-value">{{ store.current()?.precipitation }} {{ store.current()?.units?.precipitation }}</span>
+            </div>
+            <!-- } -->
+            
+        </section>
+        <section class="section-daily">
+            <h4 class="section-daily-header">Daily forecast</h4>
+            <div class="section-daily-cards">
+                @for(card of store.daily(); track card.date) {
+                    <div class="daily-card">
+                        <span class="daily-card-weekday">{{ card.date | weekday }}</span> <!-- нужен пайп -->
+                        <div class="daily-card-image">
+                            <img [src]="card.weatherCode | weatherIcon" [alt]="card.weatherCode">
+                        </div>
+                        <div class="daily-card-temperature">
+                            <span>{{ card.max }}°</span>
+                            <span>{{ card.min }}°</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+        <section class="section-hourly">
+            <div class="header-wrapper">
+                <h4 class="section-hourly-header">Hourly forecast</h4>
+
+                <div class="section-hourly-select"
+                     tabindex="0"
+                     (click)="toggleDropdown($event)" 
+                     #selectRef>
+                    <div class="selected-value">
+                        {{ store.selectedWeekday() || '-' }}
+                    </div>
+                    <img 
+                        class="dropdown-arrow"
+                        [class.open]="isDropdownOpen()"
+                        src="./pages/weather-forecast/icon-dropdown.svg" alt="Dropdown icon">
+                    
+                    @if (isDropdownOpen()) {
+                        <ul class="options-list">
+                            @for(day of store.weekdays(); track day) {
+                                <li class="option"
+                                    (click)="selectDay(day); $event.stopPropagation()">
+                                    {{ day }}
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+            @if(store.selectedHourly(); as hourly) {
+                @for(card of hourly.forecast; track card.time) {
+                    <div class="section-hourly-card">
+                        <div class="hourly-card-main">
+                            <div class="hourly-card-image">
+                                <img [src]="card.weatherCode | weatherIcon" [alt]="card.weatherCode">
+                            </div>
+                            <span class="hourly-card-time">
+                                {{ card.time }}
+                            </span>
+                        </div>
+                        <span class="hourly-card-temperature">
+                            {{ card.temperature }}°
+                        </span>
+                    </div>
+                }
+            }
+        </section>
+    </main>
+}

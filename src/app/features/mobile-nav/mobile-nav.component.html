@@ -1,0 +1,24 @@
+<button
+    class="burger"
+    [class.open]="mobileOpen()"
+    (click)="toggleMobileNav()"
+    aria-label="Открыть меню">
+    <span></span>
+    <span></span>
+</button>
+
+<div class="backdrop" [class.open]="mobileOpen()" (click)="onBackdropClick()"></div>
+
+<aside class="aside-menu" 
+       [class.open]="mobileOpen()"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+    <nav>
+        @for(item of navList(); track item.anchor) {
+            <a href="" (click)="onNavClick($event, item.anchor)">
+                {{ item.name }}
+            </a>
+        }
+    </nav>
+</aside>

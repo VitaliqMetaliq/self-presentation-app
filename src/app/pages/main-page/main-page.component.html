@@ -1,0 +1,81 @@
+<app-navigation-bar></app-navigation-bar>
+
+<main class="main-content">
+    <div class="content-wrapper">
+        <div class="main-info-bg" [style.backgroundPosition]="'center ' + bgPositionY() + '%'"></div>
+        <section id="home" class="main-info-wrapper">
+            <div class="main-info-content">
+                <div class="main-info-inner" [style.transform]="'translateY(' + photoTranslateY() + 'px)'">
+                    <div class="main-info-photo">
+                        <img src="/my-photo.png" alt="My photo" />
+                    </div>
+                    <div class="main-info-text" [style.opacity]="textOpacity()">
+                        <h3>Привет, меня зовут Виталий, и я - fullstack разработчик</h3>
+                        <p>Короткое вступление</p>
+                        <div class="divider"></div>
+                        <div>Fullstack developer <br/>
+                            Angular · Node.js · PostgreSQL <br/>
+                            5+ лет опыта · Remote / Relocation <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="projects-section">
+            <h3 class="projects-section-header">Проекты че каво</h3>
+            <ul>
+                <li class="project-card">
+                    <div class="project-card-photo" (click)="goToProject('rock-paper-scissors')">
+                        <img src="/rock-paper-scissors-preview.jpg" alt="Rock-Paper-Scissors game preview">
+                    </div>
+                    <div class="project-card-description">
+                        <h5 class="project-card-description-header">Камень, ножницы, бумага</h5>
+                        <span class="project-card-description-text">
+                            Классическую игру "Камень, ножницы, бумага" знают все. 
+                            Играй с компьютером и зарабатывай очки.
+                            Победа принесет 1 очко, поражение - отнимает. Набери максимум!
+                        </span>
+                        <button class="project-card-description-button"
+                                type="button"
+                                (click)="goToProject('rock-paper-scissors')">Перейти</button>
+                    </div>
+                </li>
+                <li class="project-card">
+                    <div class="project-card-photo" (click)="goToProject('weather-forecast')">
+                        <img src="/weather-forecast-preview.jpg" alt="Weather Forecast App preview">
+                    </div>
+                    <div class="project-card-description">
+                        <h5 class="project-card-description-header">Прогноз погоды</h5>
+                        <span class="project-card-description-text">
+                            Приложение прогноза погоды. Использует Open-Meteo-API
+                            и геолокацию для поиска (возможно, пока непонятно)
+                            местанахождения. Дизайн взят с Frontend Mentor.
+                        </span>
+                        <button class="project-card-description-button"
+                                type="button"
+                                (click)="goToProject('weather-forecast')">Перейти</button>
+                    </div>
+                </li>
+                <li class="project-card"></li>
+                <li class="project-card"></li>
+            </ul>
+        </section>
+        
+        <section id="skills">
+            <h3>Технологии</h3>
+            <div>
+                <app-tag-cloud
+                    [config]="cloudConfig"
+                    [tags]="tags">
+                </app-tag-cloud>
+            </div>
+        </section>
+
+        <section id="contacts" class="contacts-section">
+            <h3 class="contacts-section-header">Контакты</h3>
+            <div>GitHub</div>
+            <div>LinkedIn</div>
+            <div>Telegram</div>
+        </section>
+    </div>
+</main>

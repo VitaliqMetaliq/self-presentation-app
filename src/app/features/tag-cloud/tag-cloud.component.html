@@ -1,0 +1,11 @@
+<div class="tag-cloud-container">
+    <div
+        #cloudContainer
+        class="tag-cloud">
+        @for (tag of tags(); track tag.id) {
+            <a class="tag" [href]="tag.link" target="_blank" rel="noopener noreferrer">
+                {{ tag.name }}
+            </a>
+        }
+    </div>
+</div>

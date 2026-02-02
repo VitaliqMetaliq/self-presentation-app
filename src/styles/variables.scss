@@ -1,0 +1,46 @@
+// основная палитра
+// $colors: (
+//     // цвета на
+//     main-bg: rgb(236, 228, 228),
+//     secondary-bg: rgb(255, 255, 255),
+// );
+
+$light-palette: (
+    bg-main: #F8FAFC,
+    bg-secondary: #FFFFFF,
+    border: rgb(229, 231, 235),
+
+    text-primary: #0F172A,
+    text-secondary: #475569,
+    text-muted: #94A3B8,
+
+    accent: #4F46E5,
+    accent-hover: #4338CA,
+
+    shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06),
+    shadow-md: 0 6px 20px rgba(15, 23, 42, 0.08),
+    shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.12)
+);
+
+$dark-palette: (
+    bg-main: #0B1220,
+    bg-secondary: #111827,
+    border: rgb(31, 41, 55),
+
+    text-primary: #E5E7EB,
+    text-secondary: #9CA3AF,
+    text-muted: #6B7280,
+
+    accent: #6366F1,
+    accent-hover: #A5B4FC, // #818CF8,
+
+    shadow-sm: 0 1px 2px rgba(0,0,0,.4),
+    shadow-md: 0 8px 24px rgba(0,0,0,.45),
+    shadow-lg: 0 24px 48px rgba(0,0,0,.6)
+);
+
+@mixin export-css-vars($map) {
+    @each $name, $value in $map {
+        --#{$name}: #{$value};
+    }
+}
