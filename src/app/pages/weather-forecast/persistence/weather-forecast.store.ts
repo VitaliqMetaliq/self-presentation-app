@@ -3,7 +3,7 @@ import { OpenMeteoHttpService } from "../http-client/open-meteo-http.service";
 import { LocationData, SelectedUnits, WeatherData } from "../http-client/weather-api.dto";
 
 @Injectable()
-export class WeatherForecastStore { // типа этот сервис отвечает за лоадинг и получение данных
+export class WeatherForecastStore {
     private readonly service = inject(OpenMeteoHttpService);
 
     readonly weather = signal<WeatherData | null>(null);
@@ -15,7 +15,7 @@ export class WeatherForecastStore { // типа этот сервис отвеч
 
     readonly current = computed(() => this.weather()?.current);
 
-    readonly selectedHourly = computed(() => { // должен возвращать 24 часовых
+    readonly selectedHourly = computed(() => {
         const selected = this.selectedWeekday();
         if (!selected) return null;
 
@@ -31,11 +31,7 @@ export class WeatherForecastStore { // типа этот сервис отвеч
         }
     });
 
-    // readonly hourly = computed(() => this.weather()?.hourly ?? []); // вместо этого - другая модель
-    // если this.weather().hourly будет другой моделью, 
-
     readonly daily = computed(() => this.weather()?.daily ?? []);
-    // readonly locations = computed(() => this.search() ?? []);
 
     loadForecast(lat: number, lon: number, units?: SelectedUnits) {
         this.loading.set(true);
@@ -49,13 +45,13 @@ export class WeatherForecastStore { // типа этот сервис отвеч
     }
 
     loadLocations(name: string) {
-        this.locationsLoading.set(true); // по сути, тут должен быть другой лоадинг
-        this.error.set(null); // и другая ошибка
+        this.locationsLoading.set(true);
+        this.error.set(null);
 
         this.service.getLocations(name).subscribe({
             next: data => this.search.set(data),
-            error: err => this.search.set(null), // this.error.set(err.message),
-            complete: () => this.locationsLoading.set(false), // searchLoading
+            error: err => this.search.set(null),
+            complete: () => this.locationsLoading.set(false), 
         });
     }
 }

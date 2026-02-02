@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, effect, ElementRef, HostListener, inject, signal, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Component, effect, ElementRef, HostListener, inject, signal, ViewChild, ViewEncapsulation } from "@angular/core";
 import { WeatherForecastStore } from "./persistence/weather-forecast.store";
 import { OpenMeteoHttpService } from "./http-client/open-meteo-http.service";
 import { WeekdayPipe } from "./pipes/weekday.pipe";
@@ -74,13 +74,13 @@ export class WeatherForecastComponent {
     }
 
     onRetryClick() {
-        this.store.loadForecast(59.95, 30.19, this.selectedUnits()); // должны использоваться значение из стора или 
+        this.store.loadForecast(59.95, 30.19, this.selectedUnits());
     }
 
     onUnitChange(unit: string, value: string) {
         switch (unit) {
             case 'temperature':
-                this.selectedUnits.update((v) => ({ ...v, temperature: value as any })); // as 'celsius' | 'fahrenheit' }));
+                this.selectedUnits.update((v) => ({ ...v, temperature: value as 'celsius' | 'fahrenheit' }));
                 break;
             case 'windspeed':
                 this.selectedUnits.update((v) => ({ ...v, windspeed: value as 'kmh' | 'mph' }));
@@ -94,7 +94,7 @@ export class WeatherForecastComponent {
     @HostListener('document:click', ['$event'])
     onDocumentClick(event: Event) {
         const target = event.target as Node;
-        if (!this.selectRef.nativeElement.contains(target)) { // && this.isDropdownOpen()
+        if (!this.selectRef.nativeElement.contains(target)) {
             this.isDropdownOpen.set(false);
         }
 

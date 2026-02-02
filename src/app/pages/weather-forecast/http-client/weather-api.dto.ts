@@ -73,7 +73,6 @@ export interface DailyForecast {
 
 export interface WeatherData {
     current: CurrentWeather;
-    //   hourly: HourForecast[];
     groupedHourly: GroupedHourlyForecast[];
     daily: DailyForecast[];
 }

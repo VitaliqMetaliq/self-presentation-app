@@ -19,7 +19,6 @@
     --color-neutral-200: hsl(250, 6%, 84%);
     --color-neutral-0: hsl(0, 0%, 100%);
 
-    // --color-orange-500: hsl(28, 100%, 52%);
     --color-blue-500: hsl(233, 67%, 56%);
     --color-blue-700: hsl(248, 70%, 36%);
 
@@ -228,7 +227,6 @@
         position: absolute;
         display: flex;
         align-items: center;
-        // flex-dire ction: column;
         top: 100%;
         left: 0;
         right: 0;
@@ -248,10 +246,6 @@
             gap: 1rem;
             padding: .3rem 1rem;
             height: 100%;
-
-            // span {
-            //     // font-size: 1.2rem;
-            // }
         }
 
         &-list {
@@ -415,17 +409,15 @@
         overflow: hidden;
         grid-area: main;
         height: 285px;
-        border-radius: 1rem; //10px;
+        border-radius: 1rem;
 
         .background-image {
             position: absolute;
-            // right: 0;
             left: 0;
             height: 100%;
             object-fit: cover;
             z-index: 1;
             width: 100%;
-            // width: 100%;
         }
 
         .loading-bounce {
@@ -451,12 +443,6 @@
             }
         }
 
-
-
-        // span {
-        //     z-index: 10;
-        // }
-
         .location-wrapper {
             z-index: 10;
             text-align: center;
@@ -466,14 +452,10 @@
                 margin: 0;
                 font-size: 2rem;
                 margin-bottom: 1rem;
-                // z-index: 10;
-                // font-weight: semi-bold;
             }
 
             .today-date {
-                // z-index: 10;
                 font-size: 1.3rem;
-                // margin-top: 1rem;
             }
         }
 
@@ -482,7 +464,6 @@
         .today-temperature {
             display: flex;
             align-items: center;
-            // gap: 1.5rem;
             z-index: 10;
 
             &-image {
@@ -546,7 +527,6 @@
     &-cards {
         display: flex;
         flex-wrap: wrap;
-        // justify-content: space-between;
         gap: .5rem;
     }
 
@@ -555,7 +535,6 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        // flex-wrap: wrap;
         height: 9.5rem;
         width: 6rem;
         background-color: var(--color-neutral-800);
@@ -580,15 +559,6 @@
             width: 100%;
             font-size: 1rem;
         }
-
-        // &-max {
-        //     // font-size: .5rem;
-        //     align-self: flex-start;
-        // }
-
-        // &-min {
-        //     align-self: flex-end;
-        // }
     }
 }
 
@@ -635,7 +605,6 @@
     }
 
     &-header {
-        // display: inline-block;
         margin: 0;
         font-size: 1.3rem;
     }
@@ -644,7 +613,7 @@
         height: 40px;
         position: relative;
         display: flex;
-        justify-content: space-between; // center
+        justify-content: space-between;
         align-items: center;
         background-color: var(--color-neutral-600);
         border-radius: .5rem;

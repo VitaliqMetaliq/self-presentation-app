@@ -149,7 +149,6 @@
 @if (!store.error()) {
     <main class="main">
         <section class="section-today">
-            <!-- @if (store.current()) { -->
             <div class="section-today-main">
                 @if (!store.loading() && store.current()) {
                     <img class="background-image" src="./pages/weather-forecast/bg-today-large.svg" alt="Background for weather section">
@@ -176,7 +175,6 @@
                     </div>
                     
                 }
-                <!-- <span>Loading...</span> -->
                 
             </div>
             <div class="section-today-card">
@@ -195,7 +193,6 @@
                 <h5 class="card-header">Precipitation</h5>
                 <span class="card-value">{{ store.current()?.precipitation }} {{ store.current()?.units?.precipitation }}</span>
             </div>
-            <!-- } -->
             
         </section>
         <section class="section-daily">

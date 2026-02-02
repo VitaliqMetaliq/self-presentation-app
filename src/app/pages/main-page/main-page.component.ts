@@ -6,10 +6,9 @@ import { NavigationBarComponent } from "../../features/navigation-bar/navigation
 @Component({
     selector: 'app-main-page',
     templateUrl: './main-page.component.html',
-    styleUrls: [ './main-page.component.scss' ], //'./main-page.themes.scss', './main-page.variables.scss'
+    styleUrls: [ './main-page.component.scss' ],
     imports: [TagCloudComponent, NavigationBarComponent],
     standalone: true,
-    // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class MainPageComponent {
     private router: Router = inject(Router);
@@ -67,7 +66,6 @@ export class MainPageComponent {
 
     public bgPositionY = computed(() => {
         const scroll = Math.min(this.scrollY(), this.sectionHeight);
-        // console.log(scroll);
         return 50 + scroll * 0.05; // 0.05 %
     });
 
@@ -78,14 +76,8 @@ export class MainPageComponent {
         
         const speedFactor = 0.25;
         const maxTranslate = Math.max(0, (sectionHeight - contentHeight) / 2);
-        // console.log(`${sectionHeight} ${contentHeight} max - ${maxTranslate}`);
         return Math.min(scroll * speedFactor, maxTranslate);
     });
-
-    // public localScroll = computed(() => {
-    //     const y = this.scrollY() - this.sectionTop();
-    //     return Math.max(0, Math.min(y, this.sectionHeight()));
-    // });
 
     public textOpacity = computed(() => {
         const current = this.photoTranslateY();
@@ -96,17 +88,7 @@ export class MainPageComponent {
         if (progress <= 0.4) return 1;
         if (progress >= 0.85) return 0;
 
-        // console.log(progress);
         return 1 - (progress - 0.4) / (0.85 - 0.4);
-        // const scroll = this.scrollY();
-        // const sectionH = this.sectionHeight();
-        // const fadeStart = sectionH * 0.3;
-        // const fadeEnd = sectionH * 0.7;
-
-        // if (scroll <= fadeStart) return 1;
-        // if (scroll >= fadeEnd) return 0;
-
-        // return 1 - (scroll - fadeStart) / (fadeEnd - fadeStart);
     });
 
     public ngAfterViewInit() {

@@ -50,9 +50,9 @@ export class OpenMeteoHttpService {
                     'weather_code',
                 ].join(','),
 
-                temperature_unit: tempUnit ?? 'celsius', // 'celsius', // fahrenheit
-                wind_speed_unit: windUnit ?? 'kmh', // mph
-                precipitation_unit: precUnit ?? 'mm', // in
+                temperature_unit: tempUnit ?? 'celsius', 
+                wind_speed_unit: windUnit ?? 'kmh', 
+                precipitation_unit: precUnit ?? 'mm', 
 
                 forecast_days: 7,
                 timezone: 'auto',

@@ -12,7 +12,6 @@ export class WeatherIconPipe implements PipeTransform {
     }
 }
 
-// Сопоставить enum с иконками погоды
 export enum WeatherType {
     Drizzle = 'drizzle',
     Fog = 'fog',
@@ -24,7 +23,7 @@ export enum WeatherType {
     Sunny = 'sunny'
 }
 
-export const WEATHER_CODE_MAP: Record<number, WeatherType> = { // переделать нахуй
+export const WEATHER_CODE_MAP: Record<number, WeatherType> = {
     0: WeatherType.Sunny,
     1: WeatherType.Sunny,
     2: WeatherType.PartlyCloudy,
